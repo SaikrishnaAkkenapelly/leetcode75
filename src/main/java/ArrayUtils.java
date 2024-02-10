@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class ArrayUtils {
     public static List<Boolean> findKidsWithGreatestCandles(int candies[], int extraCandies) {
@@ -82,5 +80,51 @@ public class ArrayUtils {
         }
 
         return productExceptSelf;
+    }
+
+    public void moveZeroes(int[] numbers) {
+        int zeroIndex = 0;
+        int nonZeroIndex = 0;
+        int size = numbers.length;
+
+        while (zeroIndex < size && nonZeroIndex < size) {
+            if (numbers[zeroIndex] != 0) {
+                zeroIndex++;
+            } else if (numbers[nonZeroIndex] == 0) {
+                nonZeroIndex++;
+            } else {
+                swap(zeroIndex, nonZeroIndex, numbers);
+                zeroIndex++;
+            }
+        }
+    }
+
+    private void swap(int firstIndex, int secondIndex, int input[]) {
+        int temp = input[firstIndex];
+        input[firstIndex] = input[secondIndex];
+        input[secondIndex] = temp;
+    }
+
+    public int maxSumPairs(int[] numbers, int target) {
+        if (numbers.length == 1) {
+            return 0;
+        } else {
+            int pairs = 0;
+            Map<Integer, Integer> counts = new HashMap<Integer,Integer>();
+            for (int number : numbers) {
+                int difference = target - number;
+                if (counts.containsKey(difference)) {
+                    if (counts.get(difference) > 1) {
+                        counts.put(difference, counts.get(difference) - 1);
+                    } else {
+                        counts.remove(difference);
+                    }
+                    pairs++;
+                } else {
+                    counts.put(number, counts.getOrDefault(number, 0) + 1);
+                }
+            }
+            return pairs;
+        }
     }
 }
