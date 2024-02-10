@@ -18,35 +18,35 @@ public class ArrayUtils {
         return kidsWithGreatestCandies;
     }
 
-    public static boolean canPlaceFlowers(int[] flowerbed, int newFlowers) {
-        int totalFlowersThatCanBePut = 0;
+    public static boolean canPlaceFlowers(int[] flowerbed, int newFlowersCount) {
+        int plantedFlowersCount = 0;
 
         for (int index = 0; index < flowerbed.length; index++) {
             if (flowerbed[index] == 0) {
-                int previousIndexValue = getPreviousIndexValue(index, flowerbed);
-                int nextIndexValue = getNextIndexValue(index, flowerbed);
-                if (previousIndexValue == 0 && nextIndexValue == 0) {
+                int previousValue = getPreviousValue(index, flowerbed);
+                int nextValue = getNextValue(index, flowerbed);
+                if (previousValue == 0 && nextValue == 0) {
                     flowerbed[index] = 1;
-                    totalFlowersThatCanBePut++;
+                    plantedFlowersCount++;
                 }
             }
         }
 
-        return newFlowers <= totalFlowersThatCanBePut;
+        return newFlowersCount <= plantedFlowersCount;
     }
 
-    private static int getPreviousIndexValue(int currentIndex, int[] flowerbed) {
+    private static int getPreviousValue(int index, int[] flowerbed) {
         int value = 0;
-        if (currentIndex - 1 >= 0) {
-            value = flowerbed[currentIndex - 1];
+        if (index - 1 >= 0) {
+            value = flowerbed[index - 1];
         }
         return value;
     }
 
-    private static int getNextIndexValue(int currentIndex, int[] flowerbed) {
+    private static int getNextValue(int index, int[] flowerbed) {
         int value = 0;
-        if (currentIndex + 1 < flowerbed.length) {
-            value = flowerbed[currentIndex + 1];
+        if (index + 1 < flowerbed.length) {
+            value = flowerbed[index + 1];
         }
         return value;
     }
