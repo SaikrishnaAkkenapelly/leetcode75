@@ -29,7 +29,7 @@ public class StringUtils {
             end--;
         }
 
-        return String.join(" ",words);
+        return String.join(" ", words);
     }
 
     private static void swap(int firstIndex, int secondIndex, String input[]) {
@@ -37,4 +37,36 @@ public class StringUtils {
         input[firstIndex] = input[secondIndex];
         input[secondIndex] = temp;
     }
+
+    public static String reverseVowels(String word) {
+        int start = 0;
+        int end = word.length() - 1;
+        char wordArray[] = word.toCharArray();
+
+        while (start < end) {
+            if (!isCharVowel(wordArray[start])) {
+                start++;
+            } else if (!isCharVowel(wordArray[end])) {
+                end--;
+            } else {
+                swap(start, end, wordArray);
+                start++;
+                end--;
+            }
+        }
+
+        return String.valueOf(wordArray);
+    }
+
+    private static boolean isCharVowel(char input) {
+        return (input == 'a' || input == 'e' || input == 'i' || input == 'o' || input == 'u'
+                || input == 'A' || input == 'E' || input == 'I' || input == 'O' || input == 'U');
+    }
+
+    private static void swap(int firstIndex, int secondIndex, char input[]) {
+        char temp = input[firstIndex];
+        input[firstIndex] = input[secondIndex];
+        input[secondIndex] = temp;
+    }
+
 }
