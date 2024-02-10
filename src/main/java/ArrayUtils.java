@@ -30,9 +30,12 @@ public class ArrayUtils {
                     plantedFlowersCount++;
                 }
             }
+            if(plantedFlowersCount >= newFlowersCount){
+                return true;
+            }
         }
 
-        return newFlowersCount <= plantedFlowersCount;
+        return false;
     }
 
     private static int getPreviousValue(int index, int[] flowerbed) {
