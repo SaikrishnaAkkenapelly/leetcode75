@@ -69,4 +69,36 @@ public class StringUtils {
         input[secondIndex] = temp;
     }
 
+    public static int compress(char[] chars) {
+        char previousChar = chars[0];
+        int previousCharSize = 1;
+        int length = chars.length;
+        int compressedIndex = 0;
+
+        for (int index = 1; index < length; index++) {
+            if (chars[index] == previousChar) {
+                previousCharSize++;
+            } else {
+                chars[compressedIndex++] = previousChar;
+                compressedIndex = updateChars(chars, compressedIndex, previousCharSize);
+                previousChar = chars[index];
+                previousCharSize = 1;
+            }
+        }
+
+        chars[compressedIndex++] = previousChar;
+        compressedIndex = updateChars(chars, compressedIndex, previousCharSize);
+
+        return compressedIndex;
+    }
+
+    private static int updateChars(char chars[], int index, int previousCharSize) {
+        if (previousCharSize != 1) {
+            char numbers[] = String.valueOf(previousCharSize).toCharArray();
+            for (char number : numbers) {
+                chars[index++] = number;
+            }
+        }
+        return index;
+    }
 }
